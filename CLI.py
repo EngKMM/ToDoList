@@ -2,7 +2,7 @@ import functions
 import time
 time = time.strftime("The current time is: %d/%m/%Y %H:%M:%S")
 print(time)
-
+# Anas
 def add():
     todo = user_action[4:].strip()
 
@@ -28,7 +28,7 @@ def show():
         print("No todos found.")
         return
 
-
+# ABDULLAH
 def complete():
 
     try:
