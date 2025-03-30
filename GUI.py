@@ -16,6 +16,7 @@ window = Sg.Window("My To-Do's",
                            [input_box, add_button],
                            [listbox, edit_button, complete_button]],
                    font=("Helvetica", 20))
+
 while True:
     event, item = window.read()
     print(event)
@@ -29,20 +30,26 @@ while True:
             functions.write_todos(todos)
             window["todos"].update(values=todos)
         case "Edit":
-            todo_to_edit = item["todos"][0]
-            new_todo = item["todo"]
+            try:
+                todo_to_edit = item["todos"][0]
+                new_todo = item["todo"]
 
-            todos = functions.read_todos()
-            index = todos.index(todo_to_edit)
-            todos[index] = new_todo + "\n"
-            functions.write_todos(todos)
-            window["todos"].update(values=todos)
+                todos = functions.read_todos()
+                index = todos.index(todo_to_edit)
+                todos[index] = new_todo + "\n"
+                functions.write_todos(todos)
+                window["todos"].update(values=todos)
+            except(IndexError):
+                continue
         case "Complete":
-            todo_to_complete = item["todos"][0]
-            todos = functions.read_todos()
-            todos.remove(todo_to_complete)
-            functions.write_todos(todos)
-            window["todos"].update(values=todos)
+            try:
+                todo_to_complete = item["todos"][0]
+                todos = functions.read_todos()
+                todos.remove(todo_to_complete)
+                functions.write_todos(todos)
+                window["todos"].update(values=todos)
+            except(IndexError):
+                continue
         case Sg.WIN_CLOSED:
             break
 
