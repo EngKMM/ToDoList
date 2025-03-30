@@ -10,11 +10,13 @@ listbox = Sg.Listbox(values=functions.read_todos(),
                      size=[45, 10])
 edit_button = Sg.Button("Edit")
 complete_button = Sg.Button("Complete")
+exit_button = Sg.Button("Exit")
 
 window = Sg.Window("My To-Do's",
                    layout=[[label],
                            [input_box, add_button],
-                           [listbox, edit_button, complete_button]],
+                           [listbox, edit_button, complete_button],
+                           [exit_button]],
                    font=("Helvetica", 20))
 
 while True:
@@ -39,7 +41,7 @@ while True:
                 todos[index] = new_todo + "\n"
                 functions.write_todos(todos)
                 window["todos"].update(values=todos)
-            except(IndexError):
+            except IndexError:
                 continue
         case "Complete":
             try:
@@ -48,8 +50,9 @@ while True:
                 todos.remove(todo_to_complete)
                 functions.write_todos(todos)
                 window["todos"].update(values=todos)
-            except(IndexError):
+            except IndexError:
                 continue
+        case "Exit":
+            break
         case Sg.WIN_CLOSED:
             break
-
